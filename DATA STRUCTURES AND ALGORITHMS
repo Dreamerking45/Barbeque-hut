@@ -1,0 +1,165 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyMLCIX6JuRzCZN6CZWb9Y1e",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Dreamerking45/Barbeque-hut/blob/main/DATA%20STRUCTURES%20AND%20ALGORITHMS\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 3,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "NblJeev35q3Q",
+        "outputId": "f88f230d-5ce4-4e15-f8ea-6b9b078a6e2a"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "394\n",
+            "623\n"
+          ]
+        }
+      ],
+      "source": [
+        "def simple_hash(s):\n",
+        "  return(sum(ord(char) for char in s))\n",
+        "\n",
+        "hash = simple_hash(\"abcd\")\n",
+        "hash2 = simple_hash(\"adrian\")\n",
+        "print(hash)\n",
+        "print(hash2)"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#simple hash function\n",
+        "def simple_hash(s, table_size):\n",
+        "  return sum(ord(char)for char in s) % table_size\n",
+        "\n",
+        "#create a hash table\n",
+        "table_size = 10\n",
+        "hash_table = [None] * table_size\n",
+        "\n",
+        "#insert elements into the hash table\n",
+        "def insert(table, key):\n",
+        "  index = simple_hash(key, table_size)\n",
+        "  table[index] = key\n",
+        "insert(hash_table, \"abc\")\n",
+        "insert(hash_table,\"cba\")\n",
+        "print(hash_table)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "i5LP41Cn9xAL",
+        "outputId": "f952b7d7-4ca0-4a4b-cdea-c87017114e05"
+      },
+      "execution_count": 4,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[None, None, None, None, 'cba', None, None, None, None, None]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "class HashSet:\n",
+        "  def __init__(self, capacity):\n",
+        "    self.table = [[] for _ in range(capacity)]\n",
+        "    self.capacity = capacity\n",
+        "\n",
+        "  def _hash(self, key):\n",
+        "    return sum(ord(char) for char in key) % self.capacity\n",
+        "\n",
+        "  def add(self, key):\n",
+        "    index = self._hash(key)\n",
+        "    if key not in self.table[index]:\n",
+        "      self.table[index].append(key)\n",
+        "\n",
+        "  def remove(self,key):\n",
+        "    index = self._hash(key)\n",
+        "    if key in self.table[index]:\n",
+        "      self.table[index].remove(key)\n",
+        "\n",
+        "  def contains(self, key):\n",
+        "    index = self._hash(key)\n",
+        "    return key in self.table[index]\n",
+        "\n",
+        "hash_set = HashSet(10)\n",
+        "hash_set.add(\"abc\")\n",
+        "hash_set.add(\"cbc\")\n",
+        "print(hash_set.contains(\"abc\"))\n",
+        "print(hash_set.contains(\"cba\"))\n",
+        "hash_set.remove(\"abc\")\n",
+        "print(hash_set.contains(\"cbac\"))\n",
+        "\n",
+        "\n",
+        "print(hash_set.table)\n",
+        "\n",
+        ""
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "hOF8dFgLB08z",
+        "outputId": "cd7b9edb-0808-49f7-8cf8-e70e0f59a751"
+      },
+      "execution_count": 7,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "True\n",
+            "False\n",
+            "False\n",
+            "[[], [], [], [], [], [], ['cbc'], [], [], []]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "X1Allk6sPfFk"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
